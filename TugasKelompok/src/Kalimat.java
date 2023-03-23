@@ -7,7 +7,7 @@
  * 5. Almira Utami (222111877)
  */
 public class Kalimat <T> extends ChangerType<T>{
-    final private String type = "KALIMAT";
+    final private String type = "Kalimat";
     final int jumlahKata = 1000;
     private String temp;
     public Kalimat(String nama, String id, T value){

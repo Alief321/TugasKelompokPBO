@@ -8,17 +8,17 @@ import java.util.HashMap;
  * 5. Almira Utami (222111877)
  */
 public class Kode <T> extends ChangerType<T>{
-    final private String type = "KODE";
+    final private String type = "Kode";
     private String temp;
-    private HashMap<String,String> mapList;
+    private HashMap<String,String> daftarKode;
     private int length;
     public Kode(String nama, String id, T value, int length){
         super(nama,id,value);
         this.length = length;
     }
-    public Kode(String nama, String id, T value, HashMap<String,String> mapList, int length){
+    public Kode(String nama, String id, T value, HashMap<String,String> daftarKode, int length){
         super(nama,id,value);
-        this.mapList = mapList;
+        this.daftarKode = daftarKode;
         this.length = length;
     }
     public String getType() {
@@ -31,7 +31,7 @@ public class Kode <T> extends ChangerType<T>{
         this.temp = (String) getValue();
     }
     public HashMap<String,String> getKamusKode(){
-        return mapList;
+        return daftarKode;
     }
     public int getLength(){
         return length;
@@ -59,10 +59,10 @@ public class Kode <T> extends ChangerType<T>{
             return true;
         }
     }
-    public boolean constraintError(T value,HashMap<String,String> mapList,int length){
+    public boolean constraintError(T value,HashMap<String,String> daftarKode,int length){
         try {
             setTemp(value);
-            if (!mapList.containsKey(getTemp())){
+            if (!daftarKode.containsKey(getTemp())){
                 throw new InputError(String.format("Nilai Variabel %s Salah",super.getNama()));
             }
             if (getTemp().length()>length){
@@ -73,7 +73,7 @@ public class Kode <T> extends ChangerType<T>{
         } catch (KodeError e){
             System.out.println(e);
         } finally {
-            if (mapList.containsKey(getTemp()) && getTemp().length()<=length){
+            if (daftarKode.containsKey(getTemp()) && getTemp().length()<=length){
                 return false;
             } else {
                 return true;
@@ -94,7 +94,7 @@ public class Kode <T> extends ChangerType<T>{
         return true;
     }
     public String getValueKode(){
-        return mapList.get(super.getValue());
+        return daftarKode.get(super.getValue());
     }
 
     public String toString(boolean identifier){
