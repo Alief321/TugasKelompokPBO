@@ -15,7 +15,7 @@ public class KodeProv <T> extends Kode <T>{
         super(nama,id,value,length);
     }
     public void addKabupaten(KodeKab kodeKab){
-        this.daftarNama.add(kodeKab);
+        this.daftarNama.add(kodeKab.getNama());
     }
     public ArrayList getKabupatenList(){
         return daftarNama;
