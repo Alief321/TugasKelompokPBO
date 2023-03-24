@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.util.HashMap;
+
 /**
  * Kelompok 1:
  * 1. Adib Sulthon Muammal (222111840)
@@ -8,12 +11,24 @@
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Main.main()");
-//        adhakldaldb
-//adhadahlDA
-//        cek
-//  coba
-//cek cek
-//cek adib yoi bro
+        Scanner userInput = new Scanner(System.in);
+        String kodeProv,kodeKab,kodeKec,alamat,namaPerusahaan,telp,fax,Input;
+        System.out.println("Program Validasi Kuesioner PPBH");
+        System.out.println("1. Input Kuesioner");
+        System.out.println("2. LIhat List Perusahaan");
+        System.out.println("3. Exit");
+        Input = userInput.nextLine();
+        switch (Input) {
+            case "1":
+                break;
+            case "2":
+                break;
+            case "3":
+                System.exit(0);
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
     }
 }

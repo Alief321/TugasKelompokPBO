@@ -18,7 +18,7 @@ public class KodeKab <T> extends Kode <T> {
     }
    
     public void addKecamatan(KodeKec kodeKec){
-        this.daftarNama.add(kodeKec);
+        this.daftarNama.add(kodeKec.getNama());
     }
     
     public ArrayList getKecamatanList(){
