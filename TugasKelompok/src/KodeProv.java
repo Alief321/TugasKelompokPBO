@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/**
+ * Kelompok 1:
+ * 1. Adib Sulthon Muammal (222111840)
+ * 2. Adinda Ayu Pramesthi (222111843)
+ * 3. Aisyah Devyta Maharani (222111869)
+ * 4. Aliefta Zulvansyah Bahyperdana (222111873)
+ * 5. Almira Utami (222111877)
  */
 import java.util.ArrayList;
-/**
- *
- * @author hp
- * @param <T>
- */
 public class KodeProv <T> extends Kode <T>{
     private ArrayList<String> daftarNama = new ArrayList<>();
 

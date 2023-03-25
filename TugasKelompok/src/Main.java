@@ -20,6 +20,12 @@ public class Main {
         Input = userInput.nextLine();
         switch (Input) {
             case "1":
+                try {
+                
+            } catch (Exception e) {
+            } finally{
+                    
+                }
                 break;
             case "2":
                 break;
