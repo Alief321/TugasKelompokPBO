@@ -27,6 +27,12 @@ public class Kode <T> extends ChangerType<T>{
     public String getTemp(){
         return temp;
     }
+
+    @Override
+    public T getValue() {
+        return super.getValue(); 
+    }
+    
     public void setTemp(T value){
         this.temp = (String) getValue();
     }
@@ -96,7 +102,9 @@ public class Kode <T> extends ChangerType<T>{
     public String getValueKode(){
         return daftarKode.get(super.getValue());
     }
-
+    
+ 
+    
     public String toString(boolean identifier){
         return String.format("%s-Nilai dari variabel %s(%s) yaitu: '%s'",getType(),super.getNama(),super.getId(),super.getValue());
     }
