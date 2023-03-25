@@ -7,25 +7,29 @@
  * 5. Almira Utami (222111877)
  */
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
-        String kodeKab = "", kodeProv="",kodeKju="" ,kodeKec="",alamat="",namaPerusahaan="",telp="",fax="",input = "",namaprov="", namakab="" ,kodeBBH="";
+        String kodeKab = "", kodeProv="",kodeKju="" ,kodeKec="",alamat="",namaPerusahaan="",telp="",fax="",input = "",namaprov="", namakab="" ,kodeBBH="",kodeKunj="",kodeActive="",kodeTanPang="", kodeHortikultura="", kodePerkebunan="", kodeKehutanan="", kodePerikanan="", kodePeternakan="",descJUU="";
         KIP kip = null;
         DPP dpp = null;
         Subsektor subsektor = null;
         KodeProv<String> provinsi=null;
         KodeKab<String> kabupaten=null;
         KodeKec<String> kecamatan=null;
-        Kode<String> bbh=null ,kju=null;
+        Kode<String> bbh=null ,kju=null, tanPang=null, hortikultura=null ,perkebunan=null, kehutanan=null, perikanan=null , peternakan=null;
         Kalimat<String> namaPerusahaanFix = null,telpFix= null, faxFix = null, alamatFix=null;
         Kuesioner kuesioner = null;
+        Perusahaan perusahaan = null;
+        ArrayList<Perusahaan> listAllPerusahaan = null;
         int periodeData = 0, idKues = 0 ,i=0, noUrut=0;
         boolean loop = true;
         
@@ -44,7 +48,7 @@ public class Main {
         }};
         
 //        Kode Jenis Usaha Utama
-        HashMap<String,String> kodeJJU = new HashMap<>(){{
+        HashMap<String,String> kodeJUU = new HashMap<>(){{
             put("1", "Padi/Palawija");
             put("2","Hortikultura");
             put("3a","Perkebunan Kakao/cokelat");
@@ -113,15 +117,15 @@ public class Main {
         //              Input Kkuesioner
         try {
             System.out.println("Input Kuesioner Details");
-            System.out.println("Kode Provinsi : ");
+            System.out.println("Kode Provinsi "+ANSI_YELLOW+"(1/2/3/4/5,..)"+ANSI_RESET+": ");
             kodeProv = userInput.nextLine();
-            System.out.println("Nama Provinsi : ");
+            System.out.println("Nama Provinsi "+ANSI_YELLOW+"(Jawa Tengah/DKI Jakarta/...)"+ ANSI_RESET+": ");
             namaprov = userInput.nextLine();
-            System.out.println("Kode Kabupaten: ");
+            System.out.println("Kode Kabupaten "+ANSI_YELLOW+"(1/2/3/4/5,..)"+ANSI_RESET+": ");
             kodeKab = userInput.nextLine();
-            System.out.println("Nama Kabupaten: ");
+            System.out.println("Nama Kabupaten "+ANSI_YELLOW+"(Jombang/Madiun/...)"+ANSI_RESET+": ");
             namakab= userInput.nextLine();
-            System.out.println("Periode data: ");
+            System.out.println("Periode data "+ANSI_YELLOW+"(Tahun misal: 2019)"+ANSI_RESET+": ");
             periodeData = userInput.nextInt();
         } catch (Exception e) {
             System.out.println("Proses Input Kuesioner Error");
@@ -159,13 +163,13 @@ public class Main {
 //                  Input KIP
                     try {
                         System.out.println("Input KIP\n");
-                        System.out.println("Kode Provinsi");
+                        System.out.println("Kode Provinsi "+ANSI_YELLOW+"(harus sama dengan Kode Provinsi Kuesioner)"+ANSI_RESET+" :");
                         kodeProv = userInput.nextLine();
                         if (!kodeProv.equalsIgnoreCase(provinsi.getValue())) {
                             System.out.println("Kesalahan input kode Provinsi");
                             throw new Exception("Kode Provinsi kuesioner dan perusahaan harus sama");
                         }
-                        System.out.println("Kode Kabupaten");
+                        System.out.println("Kode Kabupaten "+ANSI_YELLOW+"(harus sama dengan Kode Kabupaten Kuesioner)"+ANSI_RESET+" :");
                         kodeKab = userInput.nextLine();
                         if (!kodeKab.equalsIgnoreCase(kabupaten.getValue())) {
                             System.out.println("Kesalahan input kode Kabupaten");
@@ -174,14 +178,14 @@ public class Main {
                         System.out.println("Kode Kecamatan");
                         kodeKec = userInput.nextLine();
                         System.out.println("\nDaftar KJU");
-                        for (Map.Entry<String, String> entry : kodeJJU.entrySet()) {
+                        for (Map.Entry<String, String> entry : kodeJUU.entrySet()) {
                             Object key = entry.getKey();
                             Object val = entry.getValue();
                             System.out.println(key+" "+val);
                         }
                         System.out.println("Kode KJU "+ ANSI_YELLOW+"(angkanya saja) :"+ANSI_RESET);
                         kodeKju= userInput.nextLine();
-                        if (kodeJJU.containsValue(kodeKju)==false) {
+                        if (kodeJUU.containsKey(kodeKju)==false) {
                             System.out.println("Kesalahan input KJU");
                             throw new Exception("Kode KJU tidak ada dalam Kriteria BPS");
                         }
@@ -196,7 +200,7 @@ public class Main {
                         System.out.println("Membuat KIP");
                         System.out.println("Memuat variabel ...");
                         kecamatan = new KodeKec<>(kodeKec);
-                        kju = new Kode<>("KodeKju","DP.04",kodeKju,kodeJJU,2);
+                        kju = new Kode<>("KodeKju","DP.04",kodeKju,kodeJUU,2);
                         noUrut++;
                         kip = new KIP(provinsi, kabupaten, kecamatan, kju, noUrut);
                         System.out.println(kip);
@@ -225,20 +229,122 @@ public class Main {
                         }
                         System.out.println("Bentuk Badan Hukum "+ANSI_YELLOW+"(angkanya saja) : "+ANSI_RESET);
                         kodeBBH = userInput.nextLine();
+                         if (BBHList.containsKey(kodeBBH)==false) {
+                            System.out.println("Kesalahan input BBH");
+                            throw new Exception("Kode BBH tidak ada dalam Kriteria BPS");
+                         }
                     } catch (Exception e) {
                         System.out.println("Process Input Informasi umum error");
+                        System.out.println(e);
+                        System.exit(0);
                     }
 //                    Input DPP
                     try {
                         System.out.println("Input Pencacahan dengan Kuesioner Rutin/DPP\n");
+                        System.out.println("Daftar Kunjungan\n");
+                        for (Map.Entry<String, String> entry : umum.entrySet()) {
+                            Object key = entry.getKey();
+                            Object val = entry.getValue();
+                            System.out.println(key+" "+val);
+                        }
                         System.out.println("Kunjungan: ");
+                        kodeKunj = userInput.nextLine();
+                        if (umum.containsKey(kodeKunj)==false) {
+                            System.out.println("Kesalahan input Kunjungan");
+                            throw new Exception("Kode kunjungan tidak ada dalam Kriteria BPS");
+                         }
+                        System.out.println("Daftar Kategori Aktif\n");
+                        for (Map.Entry<String, String> entry : active.entrySet()) {
+                            Object key = entry.getKey();
+                            Object val = entry.getValue();
+                            System.out.println(key+" "+val);
+                        }
                         System.out.println("Aktiv: ");
+                        kodeActive = userInput.nextLine();
+                        if (active.containsKey(kodeActive)==false) {
+                            System.out.println("Kesalahan input kodeActive");
+                            throw new Exception("Kode Aktif tidak ada dalam Kriteria BPS");
+                         }
                     } catch (Exception e) {
                         System.out.println("Process Input DPP error");
+                        System.out.println(e);
+                        System.exit(0);
                     }
                     
+//                    Generate Subsektor dan JUU
+                    try {
+                        if(kodeKju.equals("1")){
+                            kodeTanPang = "1";
+                        }else{
+                            kodeTanPang = "0";
+                        }
+                        
+                        if (kodeKju.equals("2")) {
+                            kodeHortikultura = "1";
+                        } else {
+                            kodeHortikultura = "0";
+                        }
+                        
+                        if (kodeKju.equals("9")||kodeKju.equals("10")||kodeKju.equals("11")) {
+                            kodePeternakan = "1";
+                        } else {
+                            kodePeternakan = "0";
+                        }
+                        
+                        if (kodeKju.equals("4")||kodeKju.equals("5")||kodeKju.equals("6")) {
+                            kodeKehutanan = "1";
+                        } else {
+                            kodeKehutanan = "0";
+                        }
+                        
+                        if (kodeKju.matches("^7")||kodeKju.equals("8")) {
+                            kodePerikanan = "1";
+                        } else {
+                            kodePerikanan = "0";
+                        }
+                        
+                        if (kodeKju.matches("^3")){
+                            kodePerkebunan = kodeKju;
+                        } else{
+                            kodePerkebunan = "0";
+                        }
+                        
+                        tanPang = new Kode<>("KodeTanpang","DPP.14",kodeTanPang,2);
+                        hortikultura = new Kode<>("KodeHortikultura","DP[.15",kodeHortikultura,2);
+                        perkebunan = new Kode<>("KodePerkebunan","DPP.16",kodePerkebunan,2);
+                        peternakan = new Kode<>("KodePeternakan","DPP.17",kodePeternakan,2);
+                        kehutanan = new Kode<>("KodeKehutanan","DPP.18",kodeKehutanan,2);
+                        perikanan = new Kode<>("KodePerikanan","DPP.19",kodePerikanan,2);
+                        
+                        subsektor = new Subsektor(tanPang, hortikultura, perkebunan, kehutanan, peternakan, perikanan);
+                        descJUU = kodeJUU.get(kodeKju);
+                    } catch (Exception e) {
+                        System.out.println("Generate JUU & Subsektor error");
+                        System.out.println(e);
+                        System.exit(0);
+                    }
+                    
+//                    Membuat Variabel Perusahaan
+                    try {
+                        namaPerusahaanFix = new Kalimat<>("NamaPerusahaan", "DPP.07", namaPerusahaan);
+                        alamatFix = new Kalimat<>("AlamatPerusahaan", "DPP.08", alamat);
+                        telpFix = new Kalimat<>("Telephone", "DPP.09", telp);
+                        faxFix = new Kalimat<>("Fax", "DPP.10", fax);
+                        perusahaan = new Perusahaan(noUrut, kip, namaPerusahaanFix, alamatFix, telpFix, faxFix, bbh, subsektor, dpp, descJUU);
+                        listAllPerusahaan.add(perusahaan);
+                        kuesioner.setListAllPerusahaan(listAllPerusahaan);
+                    } catch (Exception e) {
+                        System.out.println("Generate JUU & Subsektor error");
+                        System.out.println(e);
+                        System.exit(0);
+                    }
                     break;
                 case "2":
+                    if (kuesioner.getListAllPerusahaan().isEmpty()){
+                        System.out.println("Belum ada perusahaan yang didata\n");
+                    } else{
+                        System.out.println(kuesioner.getListAllPerusahaan()+"\n");
+                    }
                     break;
                 case "3":
                     System.exit(0);
