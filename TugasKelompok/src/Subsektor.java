@@ -15,17 +15,42 @@ public class Subsektor {
     private Kode perikanan;
 
     public Subsektor(Kode tanamanPangan, Kode holtikultura, Kode perkebunan, Kode kehutanan, Kode peternakan, Kode perikanan) {
-        this.tanamanPangan = tanamanPangan;
-        this.holtikultura = holtikultura;
-        this.perkebunan = perkebunan;
-        this.kehutanan = kehutanan;
-        this.peternakan = peternakan;
-        this.perikanan = perikanan;
+        if (validate(tanamanPangan, holtikultura, perkebunan, kehutanan, peternakan, perikanan)) {
+            this.tanamanPangan = tanamanPangan;
+            this.holtikultura = holtikultura;
+            this.perkebunan = perkebunan;
+            this.kehutanan = kehutanan;
+            this.peternakan = peternakan;
+            this.perikanan = perikanan;
+        }
+
     }
 
+    public boolean validate(Kode tanamanPangan, Kode holtikultura, Kode perkebunan, Kode kehutanan, Kode peternakan, Kode perikanan ){
+        if(tanamanPangan.checkValue(true)&& holtikultura.checkValue(true) && perkebunan.checkValue(true) && kehutanan.checkValue(true) && perikanan.checkValue(true)){
+            System.out.println("Validasi Sukses! Object Subsektor Akan Dibuat!");
+            return true;
+        }
+        else{
+            Object[] obj = {tanamanPangan,peternakan,perkebunan,perikanan,kehutanan,holtikultura};
+            System.out.println("Validasi Gagal! Harap Ulang Periksa Kembali Data Object Subsektor");
+            deleteSubSektor(obj);
+            return false;
+        }
+     }
+     
+     public void delete(Object obj){
+        obj = null;
+     }
+      public void deleteSubSektor(Object[] objs){
+        for (Object obj:objs){
+            delete(obj);
+        }
+        System.out.println("Input Sebelumnya Sudah Berhasil Dihapus");
+    }
     @Override
     public String toString() {
-        return super.toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return super.toString();
     }
     
     

@@ -38,6 +38,10 @@ public class KodeKab <T> extends Kode <T> {
             return false;
         }
     }
+
+    public String getNamaKab() {
+        return namaKab;
+    }
     
     @Override
     public String toString(){

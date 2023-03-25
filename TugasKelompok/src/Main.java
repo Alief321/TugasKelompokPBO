@@ -25,16 +25,16 @@ public class Main {
         KodeProv<String> provinsi=null;
         KodeKab<String> kabupaten=null;
         KodeKec<String> kecamatan=null;
-        Kode<String> bbh=null ,kju=null, tanPang=null, hortikultura=null ,perkebunan=null, kehutanan=null, perikanan=null , peternakan=null;
+        Kode<String> bbh=null ,kju=null, tanPang=null, hortikultura=null ,perkebunan=null, kehutanan=null, perikanan=null , peternakan=null, kunjungan = null, aktif=null;
         Kalimat<String> namaPerusahaanFix = null,telpFix= null, faxFix = null, alamatFix=null;
         Kuesioner kuesioner = null;
         Perusahaan perusahaan = null;
-        ArrayList<Perusahaan> listAllPerusahaan = null;
+        ArrayList<Perusahaan> listAllPerusahaan = new ArrayList<>();
         int periodeData = 0, idKues = 0 ,i=0, noUrut=0;
         boolean loop = true;
         
 //        Kode BBH
-        HashMap<String,String> BBHList = new HashMap<>(){{
+        HashMap<String,String> BBHList = new HashMap<String,String>(){{
             put("01", "Perusahaan Negara (PN)");
             put("02", "Perusahaan Daerah (PD)");
             put("03", "Persero");
@@ -48,7 +48,7 @@ public class Main {
         }};
         
 //        Kode Jenis Usaha Utama
-        HashMap<String,String> kodeJUU = new HashMap<>(){{
+        HashMap<String,String> kodeJUU = new HashMap<String,String>(){{
             put("1", "Padi/Palawija");
             put("2","Hortikultura");
             put("3a","Perkebunan Kakao/cokelat");
@@ -78,13 +78,13 @@ public class Main {
         }};
         
 //       Kode Ada tidak ada
-        HashMap<String,String> umum = new HashMap<>(){{
+        HashMap<String,String> umum = new HashMap<String,String>(){{
             put("0", "tidak ada");
             put("1", "ada");
         }};
         
 //       Kode Aktiv
-        HashMap<String,String> active = new HashMap<>(){{
+        HashMap<String,String> active = new HashMap<String,String>(){{
             put("1", "Aktif");
             put("2", "Tutup Sementara/ Tidak Ada Kegiatan");
             put("3", "Belum Berproduksi");
@@ -97,7 +97,7 @@ public class Main {
         }};
         
 //       Kode Perkebunan
-        HashMap<String,String> kebun = new HashMap<>(){{
+        HashMap<String,String> kebun = new HashMap<String,String>(){{
             put("3a","Perkebunan Kakao/cokelat");
             put("3b","Perkebunan Kare");
             put("3c","Perkebunan Kelapa sawit");
@@ -273,6 +273,8 @@ public class Main {
                     
 //                    Generate Subsektor dan JUU
                     try {
+                        System.out.println("Generate Subsektor dan JUU");
+                        System.out.println("Memuat...");
                         if(kodeKju.equals("1")){
                             kodeTanPang = "1";
                         }else{
@@ -310,7 +312,7 @@ public class Main {
                         }
                         
                         tanPang = new Kode<>("KodeTanpang","DPP.14",kodeTanPang,2);
-                        hortikultura = new Kode<>("KodeHortikultura","DP[.15",kodeHortikultura,2);
+                        hortikultura = new Kode<>("KodeHortikultura","DP.15",kodeHortikultura,2);
                         perkebunan = new Kode<>("KodePerkebunan","DPP.16",kodePerkebunan,2);
                         peternakan = new Kode<>("KodePeternakan","DPP.17",kodePeternakan,2);
                         kehutanan = new Kode<>("KodeKehutanan","DPP.18",kodeKehutanan,2);
@@ -326,15 +328,21 @@ public class Main {
                     
 //                    Membuat Variabel Perusahaan
                     try {
+                        System.out.println("Membuat variabel perusahaan");
+                        System.out.println("Memuat variabel...");
                         namaPerusahaanFix = new Kalimat<>("NamaPerusahaan", "DPP.07", namaPerusahaan);
                         alamatFix = new Kalimat<>("AlamatPerusahaan", "DPP.08", alamat);
                         telpFix = new Kalimat<>("Telephone", "DPP.09", telp);
                         faxFix = new Kalimat<>("Fax", "DPP.10", fax);
+                        bbh = new Kode<>("BBH", "DPP.11", kodeBBH,BBHList,2);
+                        kunjungan = new Kode<>("kunjungan", "DPP.12", kodeKunj,umum, 2);
+                        aktif = new Kode<>("aktif", "DPP.13", kodeActive,active, 2);
+                        dpp = new DPP(kunjungan, aktif);
                         perusahaan = new Perusahaan(noUrut, kip, namaPerusahaanFix, alamatFix, telpFix, faxFix, bbh, subsektor, dpp, descJUU);
                         listAllPerusahaan.add(perusahaan);
                         kuesioner.setListAllPerusahaan(listAllPerusahaan);
                     } catch (Exception e) {
-                        System.out.println("Generate JUU & Subsektor error");
+                        System.out.println("Membuat Variabel Perusahaan gagal");
                         System.out.println(e);
                         System.exit(0);
                     }

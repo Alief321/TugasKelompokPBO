@@ -24,14 +24,48 @@ public class Kuesioner {
         this.PeriodeData = PeriodeData;
     }
 
-    
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setKodeProv(KodeProv kodeProv) {
+        this.kodeProv = kodeProv;
+    }
+
+    public KodeProv getKodeProv() {
+        return kodeProv;
+    }
+
+    public void setKodeKab(KodeKab kodeKab) {
+        this.kodeKab = kodeKab;
+    }
+
+    public KodeKab getKodeKab() {
+        return kodeKab;
+    }
+
+    public void setPeriodeData(int PeriodeData) {
+        this.PeriodeData = PeriodeData;
+    }
+
+    public int getPeriodeData() {
+        return PeriodeData;
+    }
     
     public void setListAllPerusahaan(ArrayList<Perusahaan> listAllPerusahaan) {
         this.listAllPerusahaan = listAllPerusahaan;
     }
 
-    public ArrayList<Perusahaan> getListAllPerusahaan() {
-        return listAllPerusahaan;
+    public String getListAllPerusahaan() {
+        String kata="";
+        for (Perusahaan perusahaan : listAllPerusahaan) {
+            kata += perusahaan.toString();
+        }
+        return kata;
     }
 
     public static int getCountPerusahaan() {

@@ -27,10 +27,23 @@ public class KIP {
     public int getNoUrut() {
         return noUrut;
     }
-    
-    public String getdescKJU(Kode kju){
-        return (String) kju.<String>getValue();
+
+    public Kode getKju() {
+        return kju;
     }
+
+    public KodeKab getKodeKab() {
+        return kodeKab;
+    }
+
+    public KodeKec getKodeKec() {
+        return kodeKec;
+    }
+
+    public KodeProv getKodeProv() {
+        return kodeProv;
+    }
+    
     
     public boolean validate(KodeProv kodeProv, KodeKab kodeKab, KodeKec kodeKec, Kode kju ){
         if(kodeProv.checkValue(true)&& kodeKab.checkValue(true) && kodeKec.checkValue(true) && kju.checkValue()){

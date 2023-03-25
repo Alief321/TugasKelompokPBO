@@ -23,6 +23,10 @@ public class KodeProv <T> extends Kode <T>{
     public ArrayList getKabupatenList(){
         return daftarNama;
     }
+
+    public String getNamaProv() {
+        return namaProv;
+    }
     
     public boolean validate(){
         int value = Integer.parseInt((String)this.getValue());

@@ -37,6 +37,46 @@ public class Perusahaan {
 
     }
 
+    public Kalimat getAlamat() {
+        return alamat;
+    }
+
+    public Kode getBBH() {
+        return BBH;
+    }
+
+    public DPP getDpp() {
+        return dpp;
+    }
+
+    public Kalimat getFax() {
+        return fax;
+    }
+
+    public String getJUU() {
+        return JUU;
+    }
+
+    public KIP getKodeIdentitas() {
+        return kodeIdentitas;
+    }
+
+    public Kalimat getNamaPerusahaan() {
+        return namaPerusahaan;
+    }
+
+    public int getNoUrut() {
+        return noUrut;
+    }
+
+    public Subsektor getSubsektor() {
+        return subsektor;
+    }
+
+    public Kalimat getTelp() {
+        return telp;
+    }
+
      public boolean validate(Kalimat namaPerusahaan, Kalimat alamat, Kalimat telp, Kalimat fax, Kode BBH ){
         if(namaPerusahaan.checkValue()&& alamat.checkValue() && telp.checkValue() && fax.checkValue() && BBH.checkValue()){
             System.out.println("Validasi Sukses! Object Kecamatan Akan Dibuat!");
@@ -61,7 +101,7 @@ public class Perusahaan {
     }
     @Override
     public String toString() {
-       return "Perusahaan[no Urut dalam Kabupaten = "+noUrut+"]"; 
+       return "Perusahaan[no Urut dalam Kabupaten = "+noUrut+", nama Perusahaan = "+namaPerusahaan.getValue()+", Provinsi ="+kodeIdentitas.getKodeProv().getNamaProv()+", Kabupaten = "+kodeIdentitas.getKodeKab().getNamaKab()+", id Kecamatan = "+kodeIdentitas.getKodeKec().getValue()+", alamat = "+alamat.getValue()+", telphone = "+telp.getValue()+", fax = "+fax.getValue()+", JUU = "+JUU+"]"; 
     }
     
 }
