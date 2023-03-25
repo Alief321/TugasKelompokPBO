@@ -47,7 +47,11 @@ public abstract class ChangerType <T> implements Variabel <T> {
         }
         return true;
     }
+       public void delete(Object obj){
+        obj = null;
+    }
 }
+
 class InputError extends Exception {
     public InputError(String message){
         super(message);

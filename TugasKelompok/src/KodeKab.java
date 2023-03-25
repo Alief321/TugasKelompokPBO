@@ -9,9 +9,12 @@ import java.util.ArrayList;
  */
 public class KodeKab <T> extends Kode <T> {
     private ArrayList<String> daftarNama = new ArrayList<>();
+    private String namaKab;
     
-    public KodeKab(String nama, String id, T value, int length) {
-        super(nama,id,value,length);
+    public KodeKab(T value ,String namaKab) {
+        super("KodeKab","DPP.02",value,2);
+        this.namaKab=namaKab;
+        validate();
     }
    
     public void addKecamatan(KodeKec kodeKec){
@@ -22,8 +25,22 @@ public class KodeKab <T> extends Kode <T> {
         return daftarNama;
     }
     
+    public boolean validate(){
+        if(this.checkValue(true)){
+            System.out.println("Validasi Sukses! Object Kabupaten Akan Dibuat!");
+            return true;
+        }
+        else{
+            Object obj = this;
+            System.out.println("Validasi Gagal! Harap Ulang Input Data Object Kabupaten!");
+            delete(obj);
+            System.exit(0);
+            return false;
+        }
+    }
+    
     @Override
     public String toString(){
-        return "Kode Kec = "+getNama();
+        return "Kode Kec = "+getValue();
     }  
 }

@@ -1,5 +1,3 @@
-
-import java.util.ArrayList;
 /**
  * Kelompok 1:
  * 1. Adib Sulthon Muammal (222111840)
@@ -8,16 +6,32 @@ import java.util.ArrayList;
  * 4. Aliefta Zulvansyah Bahyperdana (222111873)
  * 5. Almira Utami (222111877)
  */
+import java.util.ArrayList;
+
 public class KodeKec <T> extends Kode <T> {
     private ArrayList<String> daftarNama = new ArrayList<>();
     
-    public KodeKec(String nama, String id, T value, int length) {
-        super(nama,id,value,length);
+    public KodeKec(String nama, String id, T value) {
+        super(nama,id,value,2);
+        validate();
     }
-   
+    
+    
+    public boolean validate(){
+        if(this.checkValue(true)){
+            System.out.println("Validasi Sukses! Object Kecamatan Akan Dibuat!");
+            return true;
+        }
+        else{
+            Object obj = this;
+            System.out.println("Validasi Gagal! Harap Ulang Input Data Object Kecamatan!");
+            delete(obj);
+            return false;
+        }
+    }
     @Override
     public String toString(){
-        return "Kode Kec = "+getNama();
+        return "Kode Kec = "+getValue();
     }  
     
 }

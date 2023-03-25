@@ -27,7 +27,7 @@ public class KIP {
     }
     
     public String getdescKJU(Kode kju){
-        return kju.getNama();
+        return (String) kju.<String>getValue();
     }
 
     @Override
