@@ -15,11 +15,13 @@ public class KIP {
     
     
     public KIP(KodeProv kodeProv, KodeKab kodeKab, KodeKec kodeKec, Kode kju, int noUrut) {
+       if(validate(kodeProv, kodeKab, kodeKec, kju)){
         this.kodeProv = kodeProv;
         this.kodeKab = kodeKab;
         this.kodeKec = kodeKec;
         this.kju = kju;
         this.noUrut = noUrut;
+       }
     }
     
     public int getNoUrut() {
@@ -28,6 +30,29 @@ public class KIP {
     
     public String getdescKJU(Kode kju){
         return (String) kju.<String>getValue();
+    }
+    
+    public boolean validate(KodeProv kodeProv, KodeKab kodeKab, KodeKec kodeKec, Kode kju ){
+        if(kodeProv.checkValue(true)&& kodeKab.checkValue(true) && kodeKec.checkValue(true) && kju.checkValue()){
+            System.out.println("Validasi Sukses! Object KIP Akan Dibuat!");
+            return true;
+        }
+        else{
+            Object[] obj = {kodeProv,kodeKab,kodeKec,kju};
+            System.out.println("Validasi Gagal! Harap Ulang Input Data Object Kecamatan!");
+            deleteKIP(obj);
+            return false;
+        }
+     }
+     
+     public void delete(Object obj){
+        obj = null;
+     }
+      public void deleteKIP(Object[] objs){
+        for (Object obj:objs){
+            delete(obj);
+        }
+        System.out.println("Input Sebelumnya Sudah Berhasil Dihapus");
     }
 
     @Override

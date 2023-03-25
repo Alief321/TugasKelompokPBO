@@ -22,19 +22,22 @@ public class Perusahaan {
     }
     
     public Perusahaan(int noUrut, KIP kodeIdentitas, Kalimat namaPerusahaan, Kalimat alamat, Kalimat telp, Kalimat fax, Kode BBH, Subsektor subsektor, DPP dpp, String JUU) {
-        this.noUrut = noUrut;
-        this.kodeIdentitas = kodeIdentitas;
-        this.namaPerusahaan = namaPerusahaan;
-        this.alamat = alamat;
-        this.telp = telp;
-        this.fax = fax;
-        this.BBH = BBH;
-        this.subsektor = subsektor;
-        this.dpp = dpp;
-        this.JUU = JUU;
+        if (validate(namaPerusahaan, alamat, telp, fax, BBH)) {
+            this.noUrut = noUrut;
+            this.kodeIdentitas = kodeIdentitas;
+            this.namaPerusahaan = namaPerusahaan;
+            this.alamat = alamat;
+            this.telp = telp;
+            this.fax = fax;
+            this.BBH = BBH;
+            this.subsektor = subsektor;
+            this.dpp = dpp;
+            this.JUU = JUU;
+        }
+
     }
 
-     public boolean validate(Kode namaPerusahaan, Kalimat alamat, Kalimat telp, Kalimat fax, Kode BBH ){
+     public boolean validate(Kalimat namaPerusahaan, Kalimat alamat, Kalimat telp, Kalimat fax, Kode BBH ){
         if(namaPerusahaan.checkValue()&& alamat.checkValue() && telp.checkValue() && fax.checkValue() && BBH.checkValue()){
             System.out.println("Validasi Sukses! Object Kecamatan Akan Dibuat!");
             return true;

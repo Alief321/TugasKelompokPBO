@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class KodeKec <T> extends Kode <T> {
     private ArrayList<String> daftarNama = new ArrayList<>();
     
-    public KodeKec(String nama, String id, T value) {
-        super(nama,id,value,2);
+    public KodeKec(T value) {
+        super("Kode Kecamatan","DP.03",value,2);
         validate();
     }
     

@@ -41,6 +41,6 @@ public class KodeKab <T> extends Kode <T> {
     
     @Override
     public String toString(){
-        return "Kode Kec = "+getValue();
+        return "Kode Kab = "+getValue()+", nama Kabupaten = "+namaKab;
     }  
 }
