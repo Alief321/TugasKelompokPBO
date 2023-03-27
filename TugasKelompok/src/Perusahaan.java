@@ -101,7 +101,16 @@ public class Perusahaan {
     }
     @Override
     public String toString() {
-       return "Perusahaan[no Urut dalam Kabupaten = "+noUrut+", nama Perusahaan = "+namaPerusahaan.getValue()+", Provinsi ="+kodeIdentitas.getKodeProv().getNamaProv()+", Kabupaten = "+kodeIdentitas.getKodeKab().getNamaKab()+", id Kecamatan = "+kodeIdentitas.getKodeKec().getValue()+", alamat = "+alamat.getValue()+", telphone = "+telp.getValue()+", fax = "+fax.getValue()+", JUU = "+JUU+"]"; 
+       return "Perusahaan "
+               +"\nno Urut dalam Kabupaten = "+noUrut+
+               "\nnama Perusahaan = "+namaPerusahaan.getValue()+
+               "\nProvinsi ="+kodeIdentitas.getKodeProv().getNamaProv()+
+               "\nKabupaten = "+kodeIdentitas.getKodeKab().getNamaKab()+
+               "\nid Kecamatan = "+kodeIdentitas.getKodeKec().getValue()+
+               "\nalamat = "+alamat.getValue()+
+               "\ntelphone = "+telp.getValue()+
+               "\nfax = "+fax.getValue()+
+               "\nJUU = "+JUU+"\n\n"; 
     }
     
 }
