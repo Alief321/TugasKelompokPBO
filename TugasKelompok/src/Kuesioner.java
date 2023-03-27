@@ -74,7 +74,11 @@ public class Kuesioner {
 
     @Override
     public String toString() {
-        return "Kuesioner[id= "+id+", kodeProv= "+kodeProv.getValue()+", kodeKab = "+kodeKab.getValue()+", periode data="+PeriodeData+" ]";
+        return "Kuesioner\n"+
+                "\nid= "+id+
+                "\nkodeProv= "+kodeProv.getValue()+
+                "\nkodeKab = "+kodeKab.getValue()+
+                "\nperiode data="+PeriodeData+"\n\n";
     }
     
     
