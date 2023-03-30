@@ -110,7 +110,7 @@ public class Kode <T> extends ChangerType<T>{
     }
 
     public String toString(){
-        return String.format("%s-Nilai dari variabel %s(%s) yaitu: [Kode: '%s', Label: '%s']",getType(),super.getNama(),super.getId(),super.getValue(),getValueKode());
+        return String.format("%s-Nilai dari variabel %s (%s) yaitu: [Kode: '%s', Label: '%s']",getType(),super.getNama(),super.getId(),super.getValue(),getValueKode());
     }
 }
 class KodeError extends Exception {

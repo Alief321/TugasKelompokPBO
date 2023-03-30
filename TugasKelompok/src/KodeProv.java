@@ -48,7 +48,7 @@ public class KodeProv <T> extends Kode <T>{
     
     @Override
     public String toString(){
-        return "Kode Prov = "+getValue()+", nama Provinsi = "+namaProv;
+        return "\nKode Prov = "+getValue()+"\nnama Provinsi = "+namaProv;
     }
     
 }

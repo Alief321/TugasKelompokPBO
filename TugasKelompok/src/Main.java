@@ -10,8 +10,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -48,7 +48,7 @@ public class Main {
         }};
         
 //        Kode Jenis Usaha Utama
-        HashMap<String,String> kodeJUU = new HashMap<String,String>(){{
+        LinkedHashMap<String,String> kodeJUU = new LinkedHashMap<String,String>(){{
             put("1", "Padi/Palawija");
             put("2","Hortikultura");
             put("3a","Perkebunan Kakao/cokelat");
@@ -78,13 +78,13 @@ public class Main {
         }};
         
 //       Kode Ada tidak ada
-        HashMap<String,String> umum = new HashMap<String,String>(){{
+        LinkedHashMap<String,String> umum = new LinkedHashMap<String,String>(){{
             put("0", "tidak ada");
             put("1", "ada");
         }};
         
 //       Kode Aktiv
-        HashMap<String,String> active = new HashMap<String,String>(){{
+        LinkedHashMap<String,String> active = new LinkedHashMap<String,String>(){{
             put("1", "Aktif");
             put("2", "Tutup Sementara/ Tidak Ada Kegiatan");
             put("3", "Belum Berproduksi");
@@ -97,7 +97,7 @@ public class Main {
         }};
         
 //       Kode Perkebunan
-        HashMap<String,String> kebun = new HashMap<String,String>(){{
+        LinkedHashMap<String,String> kebun = new LinkedHashMap<String,String>(){{
             put("3a","Perkebunan Kakao/cokelat");
             put("3b","Perkebunan Kare");
             put("3c","Perkebunan Kelapa sawit");
@@ -175,8 +175,12 @@ public class Main {
                             System.out.println("Kesalahan input kode Kabupaten");
                             throw new Exception("Kode Kabupaten kuesioner dan perusahaan harus sama");
                         }
-                        System.out.println("Kode Kecamatan");
+                        System.out.println("Kode Kecamatan"+ANSI_YELLOW+"(harus angka)"+ANSI_RESET+" :");
                         kodeKec = userInput.nextLine();
+                        if(!KodeKec.validateKecamatan(Integer.parseInt(kodeKec))){
+                            System.out.println("Kesalahan input kode Kecamatan");
+                            throw new Exception("Kode Kecamatan harus angka diantara 1-38");
+                        }
                         System.out.println("\nDaftar KJU");
                         for (Map.Entry<String, String> entry : kodeJUU.entrySet()) {
                             Object key = entry.getKey();
@@ -217,9 +221,9 @@ public class Main {
                         namaPerusahaan = userInput.nextLine();
                         System.out.println("Alamat: ");
                         alamat = userInput.nextLine();
-                        System.out.println("Nomor Telephone: ");
+                        System.out.println("Nomor Telephone "+ANSI_YELLOW+"(awali dengan +62 atau + kode negara lain)"+ANSI_RESET+" :");
                         telp = userInput.nextLine();
-                        System.out.println("Nomor Faksimili: ");
+                        System.out.println("Nomor Faksimili "+ANSI_YELLOW+"(awali dengan kode wilayah misal (021) )"+ANSI_RESET+" :");
                         fax = userInput.nextLine();
                         System.out.println("\nDaftar BBH");
                         for (Map.Entry<String, String> entry : BBHList.entrySet()) {
@@ -247,7 +251,7 @@ public class Main {
                             Object val = entry.getValue();
                             System.out.println(key+" "+val);
                         }
-                        System.out.println("Kunjungan: ");
+                        System.out.println("Kunjungan: "+ANSI_YELLOW+"(angkanya saja) : "+ANSI_RESET);
                         kodeKunj = userInput.nextLine();
                         if (umum.containsKey(kodeKunj)==false) {
                             System.out.println("Kesalahan input Kunjungan");
@@ -259,7 +263,7 @@ public class Main {
                             Object val = entry.getValue();
                             System.out.println(key+" "+val);
                         }
-                        System.out.println("Aktiv: ");
+                        System.out.println("Aktiv: "+ANSI_YELLOW+"(angkanya saja) : "+ANSI_RESET);
                         kodeActive = userInput.nextLine();
                         if (active.containsKey(kodeActive)==false) {
                             System.out.println("Kesalahan input kodeActive");

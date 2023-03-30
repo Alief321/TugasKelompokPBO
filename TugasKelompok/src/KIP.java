@@ -70,8 +70,12 @@ public class KIP {
 
     @Override
     public String toString() {
-        return "KIP [kodeProv=" + kodeProv + ", kodeKab=" + kodeKab + ", kodeKec=" + kodeKec + ", kju=" + kju
-                + ", noUrut=" + noUrut + "]";
+        return "KIP\n"+
+                "\nProvinsi" + kodeProv + 
+                "\nKabupaten=" + kodeKab + 
+                "\nKecamatan=" + kodeKec + 
+                "\nKJU=" + kju
+                + "\nnoUrut=" + noUrut;
     }
 
     
