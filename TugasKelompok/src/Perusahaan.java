@@ -34,7 +34,6 @@ public class Perusahaan {
             this.dpp = dpp;
             this.JUU = JUU;
         }
-
     }
 
     public Kalimat getAlamat() {
@@ -91,7 +90,8 @@ public class Perusahaan {
      }
      
      public void delete(Object obj){
-        obj = null;
+         obj = new Object();
+         obj = null;
      }
       public void deletePerusahaan(Object[] objs){
         for (Object obj:objs){
