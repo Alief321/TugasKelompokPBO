@@ -101,16 +101,16 @@ public class Perusahaan {
     }
     @Override
     public String toString() {
-       return "Perusahaan "
-               +"\nno Urut dalam Kabupaten = "+noUrut+
-               "\nnama Perusahaan = "+namaPerusahaan.getValue()+
-               "\nProvinsi ="+kodeIdentitas.getKodeProv().getNamaProv()+
-               "\nKabupaten = "+kodeIdentitas.getKodeKab().getNamaKab()+
-               "\nid Kecamatan = "+kodeIdentitas.getKodeKec().getValue()+
-               "\nalamat = "+alamat.getValue()+
-               "\ntelphone = "+telp.getValue()+
-               "\nfax = "+fax.getValue()+
-               "\nJUU = "+JUU+"\n\n"; 
+       return "===== Daftar Direktori Perusahaan Pertanian Berbadan Hukum ====="
+               +"\nNo Urut dalam Kabupaten    = "+noUrut+
+               "\nNama Perusahaan            = "+namaPerusahaan.getValue()+
+               "\nProvinsi                   = "+kodeIdentitas.getKodeProv().getNamaProv()+
+               "\nKabupaten                  = "+kodeIdentitas.getKodeKab().getNamaKab()+
+               "\nId Kecamatan               = "+kodeIdentitas.getKodeKec().getValue()+
+               "\nAlamat Perushaan Pertanian = "+alamat.getValue()+
+               "\nNomor Telphone             = "+telp.getValue()+
+               "\nNomor Faksimili            = "+fax.getValue()+
+               "\nJenis Usaha Utama          = "+JUU+"\n"; 
     }
     
 }

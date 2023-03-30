@@ -16,7 +16,7 @@ import java.util.Map;
 public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[33m";
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner userInput = new Scanner(System.in);
         String kodeKab = "", kodeProv="",kodeKju="" ,kodeKec="",alamat="",namaPerusahaan="",telp="",fax="",input = "",namaprov="", namakab="" ,kodeBBH="",kodeKunj="",kodeActive="",kodeTanPang="", kodeHortikultura="", kodePerkebunan="", kodeKehutanan="", kodePerikanan="", kodePeternakan="",descJUU="";
         KIP kip = null;
@@ -34,14 +34,14 @@ public class Main {
         boolean loop = true;
         
 //        Kode BBH
-        HashMap<String,String> BBHList = new HashMap<String,String>(){{
+        LinkedHashMap<String,String> BBHList = new LinkedHashMap<String,String>(){{
             put("01", "Perusahaan Negara (PN)");
             put("02", "Perusahaan Daerah (PD)");
             put("03", "Persero");
             put("04", "Perum");
             put("05", "Perseroan Terbatas (PT)");
             put("06", "Naamloze Vennootschap (NV)");
-            put("07", " Commanditaire Venootschap (CV)");
+            put("07", "Commanditaire Venootschap (CV)");
             put("08", "Firma");
             put("09", "Koperasi/KUD");
             put("10", "Yayasan");
@@ -111,24 +111,33 @@ public class Main {
             put("3k","Tanaman Perkebunan Lainnya");
             put("0", "tidak ada");
         }};
-
-        System.out.println("Program Validasi Kuesioner PPBH\n");
-        
+        System.out.println("===========================================================================");
+        System.out.println("= PROGRAM VALIDASI UPDATING DIREKTORI PERUSAHAAN PERTANIAN BERBADAN HUKUM =");
+        System.out.println("===========================================================================");
         //              Input Kkuesioner
         try {
-            System.out.println("Input Kuesioner Details");
+            System.out.println("\n===== Input Kuesioner Details =====");
             System.out.println("Kode Provinsi "+ANSI_YELLOW+"(1/2/3/4/5,..)"+ANSI_RESET+": ");
             kodeProv = userInput.nextLine();
             System.out.println("Nama Provinsi "+ANSI_YELLOW+"(Jawa Tengah/DKI Jakarta/...)"+ ANSI_RESET+": ");
             namaprov = userInput.nextLine();
+            if(namaprov.matches("\\d")){
+                System.out.println("Kesalahan input nama provinsi");
+                throw new Exception("Nama Provinsi harus huruf!");
+            }        
             System.out.println("Kode Kabupaten "+ANSI_YELLOW+"(1/2/3/4/5,..)"+ANSI_RESET+": ");
             kodeKab = userInput.nextLine();
             System.out.println("Nama Kabupaten "+ANSI_YELLOW+"(Jombang/Madiun/...)"+ANSI_RESET+": ");
             namakab= userInput.nextLine();
+            if(namakab.matches("\\d")){
+                System.out.println("Kesalahan input nama kabupaten");
+                throw new Exception("Nama kabupaten harus huruf!");
+            }
             System.out.println("Periode data "+ANSI_YELLOW+"(Tahun misal: 2019)"+ANSI_RESET+": ");
             periodeData = userInput.nextInt();
         } catch (Exception e) {
             System.out.println("Proses Input Kuesioner Error");
+            System.out.println(e);
             System.exit(0);
         }
 //            Membuat Variabel Kuesioner
@@ -146,6 +155,7 @@ public class Main {
         }
 
         while (loop= true){
+            System.out.println("\n===== Pilihan Menu Program =====");
             System.out.println("1. Input Perusahaan");
             System.out.println("2. Lihat List Perusahaan");
             System.out.println("3. Exit");
@@ -162,7 +172,7 @@ public class Main {
                 case "1":
 //                  Input KIP
                     try {
-                        System.out.println("Input KIP\n");
+                        System.out.println("\n===== Input KIP =====");
                         System.out.println("Kode Provinsi "+ANSI_YELLOW+"(harus sama dengan Kode Provinsi Kuesioner)"+ANSI_RESET+" :");
                         kodeProv = userInput.nextLine();
                         if (!kodeProv.equalsIgnoreCase(provinsi.getValue())) {
@@ -175,7 +185,7 @@ public class Main {
                             System.out.println("Kesalahan input kode Kabupaten");
                             throw new Exception("Kode Kabupaten kuesioner dan perusahaan harus sama");
                         }
-                        System.out.println("Kode Kecamatan"+ANSI_YELLOW+"(harus angka)"+ANSI_RESET+" :");
+                        System.out.println("Kode Kecamatan"+ANSI_YELLOW+"(1/2/3/4/5,..)"+ANSI_RESET+" :");
                         kodeKec = userInput.nextLine();
                         if(!KodeKec.validateKecamatan(Integer.parseInt(kodeKec))){
                             System.out.println("Kesalahan input kode Kecamatan");
@@ -244,29 +254,29 @@ public class Main {
                     }
 //                    Input DPP
                     try {
-                        System.out.println("Input Pencacahan dengan Kuesioner Rutin/DPP\n");
-                        System.out.println("Daftar Kunjungan\n");
+                        System.out.println("\n===== Input Pencacahan dengan Kuesioner Rutin/DPP =====\n");
+                        System.out.println("Daftar Kunjungan");
                         for (Map.Entry<String, String> entry : umum.entrySet()) {
                             Object key = entry.getKey();
                             Object val = entry.getValue();
                             System.out.println(key+" "+val);
                         }
-                        System.out.println("Kunjungan: "+ANSI_YELLOW+"(angkanya saja) : "+ANSI_RESET);
+                        System.out.println("Status Kunjungan"+ANSI_YELLOW+" (angkanya saja) : "+ANSI_RESET);
                         kodeKunj = userInput.nextLine();
                         if (umum.containsKey(kodeKunj)==false) {
-                            System.out.println("Kesalahan input Kunjungan");
+                            System.out.println("Kesalahan input kode status");
                             throw new Exception("Kode kunjungan tidak ada dalam Kriteria BPS");
                          }
-                        System.out.println("Daftar Kategori Aktif\n");
+                        System.out.println("\nDaftar Kategori Aktif");
                         for (Map.Entry<String, String> entry : active.entrySet()) {
                             Object key = entry.getKey();
                             Object val = entry.getValue();
                             System.out.println(key+" "+val);
                         }
-                        System.out.println("Aktiv: "+ANSI_YELLOW+"(angkanya saja) : "+ANSI_RESET);
+                        System.out.println("Status Keaktifan"+ANSI_YELLOW+" (angkanya saja) : "+ANSI_RESET);
                         kodeActive = userInput.nextLine();
                         if (active.containsKey(kodeActive)==false) {
-                            System.out.println("Kesalahan input kodeActive");
+                            System.out.println("Kesalahan input kode status");
                             throw new Exception("Kode Aktif tidak ada dalam Kriteria BPS");
                          }
                     } catch (Exception e) {
@@ -346,8 +356,9 @@ public class Main {
                         listAllPerusahaan.add(perusahaan);
                         kuesioner.setListAllPerusahaan(listAllPerusahaan);
                     } catch (Exception e) {
+                        listAllPerusahaan.clear();
                         System.out.println("Membuat Variabel Perusahaan gagal");
-                        System.out.println(e);
+                        System.out.println(e);                        
                         System.exit(0);
                     }
                     break;
@@ -363,10 +374,8 @@ public class Main {
                     loop = false;
                     break;
                 default:
-                    throw new AssertionError();
+                    throw new Exception("Kode yang Anda masukkan salah!");
             }
         }
-        
-
     }
 }

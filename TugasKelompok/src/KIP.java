@@ -70,12 +70,13 @@ public class KIP {
 
     @Override
     public String toString() {
-        return "KIP\n"+
-                "\nProvinsi" + kodeProv + 
-                "\nKabupaten=" + kodeKab + 
-                "\nKecamatan=" + kodeKec + 
-                "\nKJU=" + kju
-                + "\nnoUrut=" + noUrut;
+        return "\n===== Kode Identitas Perusahaan (KIP) ====="+
+                  kodeProv + 
+                  kodeKab + 
+                  kodeKec + 
+                "\nKode Jenis Usaha Utama = " + kju.getValue()+
+                "\nJenis Usaha Utama      = " + kju.getValueKode()+
+                "\nNomor Urut             =" + noUrut;
     }
 
     

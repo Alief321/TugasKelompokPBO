@@ -75,11 +75,11 @@ public class Kuesioner {
     
     @Override
     public String toString() {
-        return "Kuesioner\n"+
-                "\nid= "+id+
-                "\nkodeProv= "+kodeProv.getValue()+
-                "\nkodeKab = "+kodeKab.getValue()+
-                "\nperiode data="+PeriodeData+"\n\n";
+        return "\n===== Informasi Perusahaan ====="+
+                "\nId               = "+id+
+                "\nKode Provinsi    = "+kodeProv.getValue()+
+                "\nKode Kabupaten   = "+kodeKab.getValue()+
+                "\nPeriode Data     = "+PeriodeData+"\n";
     }
     
     

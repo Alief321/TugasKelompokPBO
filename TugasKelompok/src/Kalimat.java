@@ -50,7 +50,7 @@ public class Kalimat <T> extends ChangerType<T>{
             return true;
         }
         else{
-            System.out.println("Nilai nomer telephone dan faksimile tidak sesuai");
+            System.out.println("Nilai nomer telepon atau faksimili tidak sesuai");
             return false;
         }
     }

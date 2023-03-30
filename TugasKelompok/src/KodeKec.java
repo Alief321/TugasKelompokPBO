@@ -30,7 +30,7 @@ public class KodeKec <T> extends Kode <T> {
     }
     @Override
     public String toString(){
-        return "\nKode Kec = "+getValue();
+        return "\nKode Kecamatan = "+getValue();
     }  
     
 }
