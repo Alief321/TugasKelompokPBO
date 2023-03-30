@@ -76,7 +76,7 @@ public class KIP {
                   kodeKec + 
                 "\nKode Jenis Usaha Utama = " + kju.getValue()+
                 "\nJenis Usaha Utama      = " + kju.getValueKode()+
-                "\nNomor Urut             =" + noUrut;
+                "\nNomor Urut             = " + noUrut;
     }
 
     

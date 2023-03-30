@@ -226,7 +226,7 @@ public class Main {
                     
 //                    Input Informasi Umum
                     try {
-                        System.out.println("Input Informasi Umum Perusahaan\n");
+                        System.out.println("\n===== Input Informasi Umum Perusahaan =====");
                         System.out.println("Nama Perusahaan : ");
                         namaPerusahaan = userInput.nextLine();
                         System.out.println("Alamat: ");
