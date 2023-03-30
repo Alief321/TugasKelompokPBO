@@ -59,11 +59,17 @@ public class Kuesioner {
     public void setListAllPerusahaan(ArrayList<Perusahaan> listAllPerusahaan) {
         this.listAllPerusahaan = listAllPerusahaan;
     }
-
+    
     public String getListAllPerusahaan() {
         String kata="";
         for (Perusahaan perusahaan : listAllPerusahaan) {
-            kata += perusahaan.toString();
+            if (perusahaan.toString().isEmpty()) {
+                perusahaan = null;
+                kata = null;
+            }
+            else{
+                kata += perusahaan.toString();
+            }
         }
         return kata;
     }

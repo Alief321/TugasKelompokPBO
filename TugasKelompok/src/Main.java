@@ -231,9 +231,9 @@ public class Main {
                         namaPerusahaan = userInput.nextLine();
                         System.out.println("Alamat: ");
                         alamat = userInput.nextLine();
-                        System.out.println("Nomor Telephone "+ANSI_YELLOW+"(awali dengan +62 atau + kode negara lain)"+ANSI_RESET+" :");
+                        System.out.println("Nomor Telephone "+ANSI_YELLOW+"(awali dengan +62 atau +kode negara lain diikuti nomer)"+ANSI_RESET+" :");
                         telp = userInput.nextLine();
-                        System.out.println("Nomor Faksimili "+ANSI_YELLOW+"(awali dengan kode wilayah misal (021) )"+ANSI_RESET+" :");
+                        System.out.println("Nomor Faksimili "+ANSI_YELLOW+"(awali dengan kode wilayah misal (021) lalu diikuti nomer )"+ANSI_RESET+" :");
                         fax = userInput.nextLine();
                         System.out.println("\nDaftar BBH");
                         for (Map.Entry<String, String> entry : BBHList.entrySet()) {
@@ -353,17 +353,20 @@ public class Main {
                         aktif = new Kode<>("aktif", "DPP.13", kodeActive,active, 2);
                         dpp = new DPP(kunjungan, aktif);
                         perusahaan = new Perusahaan(noUrut, kip, namaPerusahaanFix, alamatFix, telpFix, faxFix, bbh, subsektor, dpp, descJUU);
-                        listAllPerusahaan.add(perusahaan);
-                        kuesioner.setListAllPerusahaan(listAllPerusahaan);
+                        if (!perusahaan.validate(namaPerusahaanFix, alamatFix, telpFix, faxFix, bbh)) {
+//                           tidak lakukan apa apa 
+                        }else{
+                            listAllPerusahaan.add(perusahaan);
+                            kuesioner.setListAllPerusahaan(listAllPerusahaan);
+                        }
                     } catch (Exception e) {
-                        listAllPerusahaan.clear();
                         System.out.println("Membuat Variabel Perusahaan gagal");
                         System.out.println(e);                        
                         System.exit(0);
                     }
                     break;
                 case "2":
-                    if (kuesioner.getListAllPerusahaan().isEmpty()){
+                    if (kuesioner.getListAllPerusahaan().isEmpty() ||  kuesioner.getListAllPerusahaan().isBlank()){
                         System.out.println("Belum ada perusahaan yang didata\n");
                     } else{
                         System.out.println(kuesioner.getListAllPerusahaan()+"\n");
