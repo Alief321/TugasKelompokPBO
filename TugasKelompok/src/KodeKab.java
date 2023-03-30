@@ -26,9 +26,13 @@ public class KodeKab <T> extends Kode <T> {
     }
     
     public boolean validate(){
-        if(this.checkValue(true)){
-            System.out.println("Validasi Sukses! Object Kabupaten Akan Dibuat!");
-            return true;
+        int value = Integer.parseInt((String)this.getValue());
+         if(value<39 && value>0){
+            if(checkValue(true)){
+               System.out.println("Validasi Sukses! Object Kabupaten Akan Dibuat!");
+               return true;
+            }
+            return false;
         }
         else{
             Object obj = this;
@@ -45,6 +49,6 @@ public class KodeKab <T> extends Kode <T> {
     
     @Override
     public String toString(){
-        return "Kode Kab = "+getValue()+", nama Kabupaten = "+namaKab;
+        return "\nKode Kab = "+getValue()+"\nnama Kabupaten = "+namaKab;
     }  
 }

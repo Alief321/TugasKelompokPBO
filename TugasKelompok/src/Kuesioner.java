@@ -72,6 +72,7 @@ public class Kuesioner {
         return countPerusahaan;
     }
 
+    
     @Override
     public String toString() {
         return "Kuesioner\n"+

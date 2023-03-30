@@ -47,11 +47,5 @@ public class Subsektor {
             delete(obj);
         }
         System.out.println("Input Sebelumnya Sudah Berhasil Dihapus");
-    }
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-    
-    
+    } 
 }

@@ -13,25 +13,24 @@ public class KodeKec <T> extends Kode <T> {
     
     public KodeKec(T value) {
         super("Kode Kecamatan","DP.03",value,2);
-        validate();
     }
     
     
-    public boolean validate(){
-        if(this.checkValue(true)){
+    public static boolean validateKecamatan(int value){
+        if(value<39 && value>0){
             System.out.println("Validasi Sukses! Object Kecamatan Akan Dibuat!");
             return true;
         }
         else{
-            Object obj = this;
+            Object obj = value;
             System.out.println("Validasi Gagal! Harap Ulang Input Data Object Kecamatan!");
-            delete(obj);
+            obj = null;
             return false;
         }
     }
     @Override
     public String toString(){
-        return "Kode Kec = "+getValue();
+        return "\nKode Kec = "+getValue();
     }  
     
 }

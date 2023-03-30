@@ -44,6 +44,15 @@ public class Kalimat <T> extends ChangerType<T>{
             }
             return false;
         }
+    }    
+     public boolean validatenomer(String nomer, String fax){
+        if (nomer.matches("\\+\\d+")&& nomer.length()<15&&fax.matches("\\(\\d+\\)\\d+")&&fax.length()<15) {
+            return true;
+        }
+        else{
+            System.out.println("Nilai nomer telephone dan faksimile tidak sesuai");
+            return false;
+        }
     }
     public boolean checkValue(){
         if (typeError(super.getValue()) || constraintError(super.getValue())){

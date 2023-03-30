@@ -78,13 +78,13 @@ public class Perusahaan {
     }
 
      public boolean validate(Kalimat namaPerusahaan, Kalimat alamat, Kalimat telp, Kalimat fax, Kode BBH ){
-        if(namaPerusahaan.checkValue()&& alamat.checkValue() && telp.checkValue() && fax.checkValue() && BBH.checkValue()){
-            System.out.println("Validasi Sukses! Object Kecamatan Akan Dibuat!");
+        if(namaPerusahaan.checkValue()&& alamat.checkValue() && telp.checkValue()&&telp.validatenomer((String)telp.getValue(), (String)fax.getValue()) && fax.checkValue() && BBH.checkValue()){
+            System.out.println("Validasi Sukses! Object Perusahaan Akan Dibuat!");
             return true;
         }
         else{
             Object[] obj = {namaPerusahaan,alamat,telp,fax,BBH};
-            System.out.println("Validasi Gagal! Harap Ulang Input Data Object Kecamatan!");
+            System.out.println("Validasi Gagal! Harap Ulang Input Data Object Perusahaan!");
             deletePerusahaan(obj);
             return false;
         }
