@@ -13,5 +13,5 @@ interface Variabel <T>{
         public void setId(String id);
         public T getValue();
         public void setValue(T value);
-        public boolean emptyError(T value);
+        public boolean emptyError(T value) throws InputError;
 }

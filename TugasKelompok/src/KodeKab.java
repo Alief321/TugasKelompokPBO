@@ -11,10 +11,9 @@ public class KodeKab <T> extends Kode <T> {
     private ArrayList<String> daftarNama = new ArrayList<>();
     private String namaKab;
     
-    public KodeKab(T value ,String namaKab) {
+    public KodeKab(T value ,String namaKab) throws InputError {
         super("KodeKab","DPP.02",value,2);
         this.namaKab=namaKab;
-        validate();
     }
    
     public void addKecamatan(KodeKec kodeKec){
@@ -25,23 +24,28 @@ public class KodeKab <T> extends Kode <T> {
         return daftarNama;
     }
     
-    public boolean validate(){
-        int value = Integer.parseInt((String)this.getValue());
-         if(value<39 && value>0){
-            if(checkValue(true)){
-               System.out.println("Validasi Sukses! Object Kabupaten Akan Dibuat!");
-               return true;
+    public boolean validate() throws InputError, NumberFormatException {
+    if(checkValue(true)){
+        try {
+            int value = Integer.parseInt((String)this.getValue());
+            if(value<39 && value>0){
+                if (namaKab.isEmpty()) {
+                    throw new InputError("Nama Kabupaten tidak boleh kosong!");
+                } else if (!namaKab.matches("(?i)^[a-z]+(?:\\s[a-z]+)*$")) {
+                    throw new InputError("Nama Kabupaten tidak valid! Silakan input ulang.");
+                }
+                System.out.println(Main.ANSI_GREEN+"Validasi Sukses! Object Kabupaten Akan Dibuat!"+Main.ANSI_RESET);
+                return true;
+            } else {
+                throw new InputError(String.format("Nilai Variabel %s Salah", getNama()));
             }
-            return false;
+        } catch (NumberFormatException e) {
+            throw new InputError(String.format("Nilai Variabel %s Harus Berupa Angka", getNama()));
         }
-        else{
-            Object obj = this;
-            System.out.println("Validasi Gagal! Harap Ulang Input Data Object Kabupaten!");
-            delete(obj);
-            System.exit(0);
-            return false;
-        }
+    } else{
+        return false;
     }
+}
 
     public String getNamaKab() {
         return namaKab;

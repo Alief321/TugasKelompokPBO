@@ -35,13 +35,26 @@ public abstract class ChangerType <T> implements Variabel <T> {
     public void setValue(T value){
         this.value = value;
     }
-    public boolean emptyError(T value) {
-        if (getValue()==null){
-            throw new NullPointerException("Nilai Variabel Kosong");
+    /*public boolean emptyError(T value){
+        try {
+            if ( getValue()==""){
+            throw new InputError(String.format("Variabel %s Kosong", getNama()));
         }
-        return false;
+        } catch (InputError e) {
+            //System.out.println(Main.ANSI_RED+e+Main.ANSI_RESET);
+            throw e;
+            return true;
+        }
+    return false;
+    }*/
+    public boolean emptyError(T value) throws InputError {
+    if (getValue().equals("")) {
+        throw new InputError(String.format("Variabel %s Kosong", getNama()));
     }
-    public boolean checkValue() {
+    return false;
+}
+
+    public boolean checkValue() throws InputError {
         if (emptyError(getValue())){
             return false;
         }
@@ -52,8 +65,3 @@ public abstract class ChangerType <T> implements Variabel <T> {
     }
 }
 
-class InputError extends Exception {
-    public InputError(String message){
-        super(message);
-    }
-}

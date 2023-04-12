@@ -12,22 +12,30 @@ public class KodeKec <T> extends Kode <T> {
     private ArrayList<String> daftarNama = new ArrayList<>();
     
     public KodeKec(T value) {
-        super("Kode Kecamatan","DP.03",value,2);
+        super("Kode Kecamatan","DP.03",value,3);
     }
     
     
-    public static boolean validateKecamatan(int value){
-        if(value<39 && value>0){
-            System.out.println("Validasi Sukses! Object Kecamatan Akan Dibuat!");
-            return true;
-        }
-        else{
-            Object obj = value;
-            System.out.println("Validasi Gagal! Harap Ulang Input Data Object Kecamatan!");
-            obj = null;
-            return false;
+    public boolean validate() throws InputError, NumberFormatException {
+    if (checkValue(true)) {
+        try {
+            int value = Integer.parseInt((String)this.getValue());
+            if (value<999 && value>0) {
+                System.out.println(Main.ANSI_GREEN + "Validasi Sukses! Object Kecamatan Akan Dibuat!" + Main.ANSI_RESET);
+                return true;
+            } else {
+                Object obj = this;
+                delete(obj);
+                throw new InputError(String.format("Nilai Variabel %s Salah", getNama()));
+            }
+        } catch (NumberFormatException e) {
+            throw new InputError(String.format("Nilai Variabel %s Harus Berupa Angka", getNama()));
         }
     }
+    return true;
+}
+
+    
     @Override
     public String toString(){
         return "\nKode Kecamatan = "+getValue();

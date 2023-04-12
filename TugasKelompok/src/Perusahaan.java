@@ -22,7 +22,6 @@ public class Perusahaan {
     }
     
     public Perusahaan(int noUrut, KIP kodeIdentitas, Kalimat namaPerusahaan, Kalimat alamat, Kalimat telp, Kalimat fax, Kode BBH, Subsektor subsektor, DPP dpp, String JUU) {
-        if (validate(namaPerusahaan, alamat, telp, fax, BBH)) {
             this.noUrut = noUrut;
             this.kodeIdentitas = kodeIdentitas;
             this.namaPerusahaan = namaPerusahaan;
@@ -33,7 +32,6 @@ public class Perusahaan {
             this.subsektor = subsektor;
             this.dpp = dpp;
             this.JUU = JUU;
-        }
     }
 
     public Kalimat getAlamat() {
@@ -76,14 +74,14 @@ public class Perusahaan {
         return telp;
     }
 
-     public boolean validate(Kalimat namaPerusahaan, Kalimat alamat, Kalimat telp, Kalimat fax, Kode BBH ){
+     public boolean validate(Kalimat namaPerusahaan, Kalimat alamat, Kalimat telp, Kalimat fax, Kode BBH ) throws InputError{
         if(namaPerusahaan.checkValue()&& alamat.checkValue() && telp.checkValue()&&telp.validatenomer((String)telp.getValue(), (String)fax.getValue()) && fax.checkValue() && BBH.checkValue()){
-            System.out.println("Validasi Sukses! Object Perusahaan Akan Dibuat!");
+            System.out.println(Main.ANSI_GREEN+"Validasi Sukses! Object Perusahaan Akan Dibuat!"+Main.ANSI_RESET);
             return true;
         }
         else{
             Object[] obj = {namaPerusahaan,alamat,telp,fax,BBH};
-            System.out.println("Validasi Gagal! Harap Ulang Input Data Object Perusahaan!");
+            System.out.println(Main.ANSI_RED+"Validasi Gagal! Harap Ulang Input Data Object Perusahaan!"+Main.ANSI_RESET);
             deletePerusahaan(obj);
             return false;
         }
@@ -101,16 +99,16 @@ public class Perusahaan {
     }
     @Override
     public String toString() {
-       return "===== Daftar Direktori Perusahaan Pertanian Berbadan Hukum ====="
+       return "\n===== Daftar Direktori Perusahaan Pertanian Berbadan Hukum =====\n"
                +"\nNo Urut dalam Kabupaten    = "+noUrut+
                "\nNama Perusahaan            = "+namaPerusahaan.getValue()+
-               "\nProvinsi                   = "+kodeIdentitas.getKodeProv().getNamaProv()+
-               "\nKabupaten                  = "+kodeIdentitas.getKodeKab().getNamaKab()+
+               "\nProvinsi                   = "+kodeIdentitas.getKodeProv().getNamaProv()+"("+kodeIdentitas.getKodeProv().getValue()+")"+
+               "\nKabupaten                  = "+kodeIdentitas.getKodeKab().getNamaKab()+"("+kodeIdentitas.getKodeKab().getValue()+")"+
                "\nId Kecamatan               = "+kodeIdentitas.getKodeKec().getValue()+
                "\nAlamat Perushaan Pertanian = "+alamat.getValue()+
                "\nNomor Telphone             = "+telp.getValue()+
                "\nNomor Faksimili            = "+fax.getValue()+
-               "\nJenis Usaha Utama          = "+JUU+"\n"; 
+               "\nJenis Usaha Utama          = "+JUU+"("+kodeIdentitas.getKju().getValue()+")"+"\n"; 
     }
     
 }
