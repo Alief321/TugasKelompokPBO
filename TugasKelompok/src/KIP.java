@@ -14,7 +14,7 @@ public class KIP {
     private int noUrut;
     
     
-    public KIP(KodeProv kodeProv, KodeKab kodeKab, KodeKec kodeKec, Kode kju, int noUrut) {
+    public KIP(KodeProv kodeProv, KodeKab kodeKab, KodeKec kodeKec, Kode kju, int noUrut) throws InputError {
        if(validate(kodeProv, kodeKab, kodeKec, kju)){
         this.kodeProv = kodeProv;
         this.kodeKab = kodeKab;
@@ -45,9 +45,9 @@ public class KIP {
     }
     
     
-    public boolean validate(KodeProv kodeProv, KodeKab kodeKab, KodeKec kodeKec, Kode kju ){
+    public boolean validate(KodeProv kodeProv, KodeKab kodeKab, KodeKec kodeKec, Kode kju ) throws InputError{
         if(kodeProv.checkValue(true)&& kodeKab.checkValue(true) && kodeKec.checkValue(true) && kju.checkValue()){
-            System.out.println("Validasi Sukses! Object KIP Akan Dibuat!");
+            System.out.println(Main.ANSI_GREEN+"Validasi Sukses! Object KIP Akan Dibuat!"+Main.ANSI_RESET);
             return true;
         }
         else{

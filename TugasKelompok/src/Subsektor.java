@@ -14,7 +14,7 @@ public class Subsektor {
     private Kode peternakan;
     private Kode perikanan;
 
-    public Subsektor(Kode tanamanPangan, Kode holtikultura, Kode perkebunan, Kode kehutanan, Kode peternakan, Kode perikanan) {
+    public Subsektor(Kode tanamanPangan, Kode holtikultura, Kode perkebunan, Kode kehutanan, Kode peternakan, Kode perikanan) throws InputError {
         if (validate(tanamanPangan, holtikultura, perkebunan, kehutanan, peternakan, perikanan)) {
             this.tanamanPangan = tanamanPangan;
             this.holtikultura = holtikultura;
@@ -26,14 +26,14 @@ public class Subsektor {
 
     }
 
-    public boolean validate(Kode tanamanPangan, Kode holtikultura, Kode perkebunan, Kode kehutanan, Kode peternakan, Kode perikanan ){
+    public boolean validate(Kode tanamanPangan, Kode holtikultura, Kode perkebunan, Kode kehutanan, Kode peternakan, Kode perikanan ) throws InputError{
         if(tanamanPangan.checkValue(true)&& holtikultura.checkValue(true) && perkebunan.checkValue(true) && kehutanan.checkValue(true) && perikanan.checkValue(true)){
-            System.out.println("Validasi Sukses! Object Subsektor Akan Dibuat!");
+            System.out.println(Main.ANSI_GREEN+"Validasi Sukses! Object Subsektor Akan Dibuat!"+Main.ANSI_RESET);
             return true;
         }
         else{
             Object[] obj = {tanamanPangan,peternakan,perkebunan,perikanan,kehutanan,holtikultura};
-            System.out.println("Validasi Gagal! Harap Ulang Periksa Kembali Data Object Subsektor");
+            System.out.println(Main.ANSI_RED+"Validasi Gagal! Harap Ulang Periksa Kembali Data Object Subsektor"+Main.ANSI_RESET);
             deleteSubSektor(obj);
             return false;
         }

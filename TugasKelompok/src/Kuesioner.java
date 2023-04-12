@@ -81,10 +81,10 @@ public class Kuesioner {
     
     @Override
     public String toString() {
-        return "\n===== Informasi Perusahaan ====="+
-                "\nId               = "+id+
-                "\nKode Provinsi    = "+kodeProv.getValue()+
-                "\nKode Kabupaten   = "+kodeKab.getValue()+
+        return "\n===== Informasi Kuesioner ====="+
+                "\nId               = "+id+ 
+                "\nKode Provinsi    = "+kodeProv.getValue()+ "("+kodeProv.getNamaProv()+")"+
+                "\nKode Kabupaten   = "+kodeKab.getValue()+ "("+kodeKab.getNamaKab()+")"+
                 "\nPeriode Data     = "+PeriodeData+"\n";
     }
     

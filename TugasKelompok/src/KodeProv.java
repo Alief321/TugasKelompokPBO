@@ -14,7 +14,6 @@ public class KodeProv <T> extends Kode <T>{
     public KodeProv(T value, String namaProv) {
         super("KodeProv","DPP.02",value,2);
         this.namaProv =namaProv;
-        validate();
     }
     
     public void addKabupaten(KodeKab kodeKab){
@@ -28,25 +27,32 @@ public class KodeProv <T> extends Kode <T>{
         return namaProv;
     }
     
-    public boolean validate(){
-        int value = Integer.parseInt((String)this.getValue());
-        if(value<39 && value>0){
-            if(checkValue(true)){
-               System.out.println("Validasi Sukses! Object Provinsi Akan Dibuat!");
-               return true;
+    public boolean validate() throws InputError, NumberFormatException {
+    if(checkValue(true)){
+        try {
+            int value = Integer.parseInt((String)this.getValue());
+            if(value<39 && value>0){
+                if (namaProv.isEmpty()) {
+                    throw new InputError("Nama Provinsi tidak boleh kosong!");
+                } else if (!namaProv.matches("(?i)^[a-z]+(?:\\s[a-z]+)*$")) {
+                    throw new InputError("Nama Provinsi tidak valid! Silakan input ulang.");
+                }
+                System.out.println(Main.ANSI_GREEN+"Validasi Sukses! Object Provinsi Akan Dibuat!"+Main.ANSI_RESET);
+                return true;
+            } else {
+                throw new InputError(String.format("Nilai Variabel %s Salah", getNama()));
             }
-            return false;
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(String.format("Nilai Variabel %s Harus Berupa Angka", getNama()));
         }
-        else{
-            Object obj = this;
-            System.out.println("Validasi Gagal! Harap Ulang Input Data Object Provinsi!");
-            delete(obj);
-            System.exit(0);
-            return false;
-        }
+    } else{
+        return false;
     }
-    
+}
+
+
     @Override
+    
     public String toString(){
         return "\nKode Provinsi = "+getValue()+
                "\nNama Provinsi = "+namaProv;

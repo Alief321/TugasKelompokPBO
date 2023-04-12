@@ -10,6 +10,7 @@ public class Kalimat <T> extends ChangerType<T>{
     final private String type = "Kalimat";
     final int jumlahKata = 1000;
     private String temp;
+    
     public Kalimat(String nama, String id, T value){
         super(nama,id,value);
     }
@@ -22,6 +23,11 @@ public class Kalimat <T> extends ChangerType<T>{
     public void setTemp(T value){
         this.temp = String.valueOf(value);
     }
+
+    public boolean emptyError(T value) throws InputError {
+        return super.emptyError(value); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
     public boolean typeError(T value){
         if (value instanceof String){
             return false;
@@ -50,13 +56,13 @@ public class Kalimat <T> extends ChangerType<T>{
             return true;
         }
         else{
-            System.out.println("Nilai nomer telepon atau faksimili tidak sesuai");
+            System.out.println(Main.ANSI_RED+"Nilai nomer telepon atau faksimili tidak Valid"+Main.ANSI_RED);
             return false;
         }
     }
-    public boolean checkValue(){
-        if (typeError(super.getValue()) || constraintError(super.getValue())){
-            System.out.println(getNama()+" error");
+    public boolean checkValue() throws InputError{
+        if (emptyError(super.getValue()) || typeError(super.getValue()) || constraintError(super.getValue())){
+            //System.out.println(getNama()+" error");
             return false;
         }
         return true;
