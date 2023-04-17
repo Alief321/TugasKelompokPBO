@@ -31,12 +31,12 @@ public class Kode <T> extends ChangerType<T>{
     public String getTemp(){
         return temp;
     }
-    @Override
     
     public T getValue() {
         return super.getValue(); 
     }
     
+    @Override
     public void setTemp(T value){
         this.temp = (String) getValue();
     }
@@ -53,6 +53,7 @@ public class Kode <T> extends ChangerType<T>{
         return super.emptyError(value); 
     }   
     
+    @Override
     public boolean typeError(T value){
         if (value instanceof String){
             return false;
@@ -77,10 +78,10 @@ public class Kode <T> extends ChangerType<T>{
         try {
             setTemp(value);
             if (!daftarKode.containsKey(getTemp())||getTemp().length()>length){
-                throw new KodeError(String.format("Nilai Variabel %s Terlalu Panjang",super.getNama()));
+                throw new InputError(String.format("Nilai Variabel %s Terlalu Panjang",super.getNama()));
             }
             
-        } catch (KodeError e){
+        } catch (InputError e){
             throw e;
         } finally {
             if (daftarKode.containsKey(getTemp()) && getTemp().length()<=length){
@@ -113,6 +114,7 @@ public class Kode <T> extends ChangerType<T>{
         return String.format("%s-Nilai dari variabel %s(%s) yaitu: '%s'",getType(),super.getNama(),super.getId(),super.getValue());
     }
     
+    @Override
     public String toString(){
         return String.format("%s-Nilai dari variabel %s (%s) yaitu: [Kode: '%s', Label: '%s']",getType(),super.getNama(),super.getId(),super.getValue(),getValueKode());
     }    

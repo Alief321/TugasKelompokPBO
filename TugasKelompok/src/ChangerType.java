@@ -6,7 +6,7 @@
  * 4. Aliefta Zulvansyah Bahyperdana (222111873)
  * 5. Almira Utami (222111877)
  */
-public class ChangerType <T> implements Variabel <T> {
+public abstract class ChangerType <T> implements Variabel <T> {
     private String nama;
     private String id;
     private T value;
@@ -60,5 +60,9 @@ public class ChangerType <T> implements Variabel <T> {
     public void delete(Object obj){
     obj = null;
     }
+    
+    public abstract void setTemp(T value);
+    public abstract boolean typeError(T value);
+    public abstract String toString();
 }
 
