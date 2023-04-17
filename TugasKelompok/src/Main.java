@@ -341,7 +341,7 @@ public class Main {
                             dpp = new DPP(kunjungan, aktif);
                             perusahaan = new Perusahaan(noUrut, kip, namaPerusahaan, alamat, telp, fax, bbh, subsektor, dpp, descJUU);
                             if (!perusahaan.validate()) {
-    //                           tidak lakukan apa apa 
+                                 noUrut--;
                             }else{
                                 listAllPerusahaan.add(perusahaan);
                                 kuesioner.setListAllPerusahaan(listAllPerusahaan);
