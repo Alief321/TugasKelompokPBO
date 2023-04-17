@@ -23,6 +23,7 @@ public class Kalimat <T> extends ChangerType<T>{
         return temp;
     }
     
+    @Override
     public void setTemp(T value){
         this.temp = String.valueOf(value);
     }
@@ -31,6 +32,7 @@ public class Kalimat <T> extends ChangerType<T>{
         return super.emptyError(value);
     }
     
+    @Override
     public boolean typeError(T value){
         if (value instanceof String){
             return false;
@@ -73,6 +75,7 @@ public class Kalimat <T> extends ChangerType<T>{
         return true;
     }
     
+    @Override
     public String toString(){
         return String.format("%s-Nilai dari variabel %s(%s) yaitu: %s",getType(),super.getNama(),super.getId(),super.getValue());
     }
