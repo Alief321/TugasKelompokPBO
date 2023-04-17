@@ -12,23 +12,27 @@ public class Kode <T> extends ChangerType<T>{
     private String temp;
     private HashMap<String,String> daftarKode;
     private int length;
+    
     public Kode(String nama, String id, T value, int length){
         super(nama,id,value);
         this.length = length;
     }
+    
     public Kode(String nama, String id, T value, HashMap<String,String> daftarKode, int length){
         super(nama,id,value);
         this.daftarKode = daftarKode;
         this.length = length;
     }
+    
     public String getType() {
         return type;
     }
+    
     public String getTemp(){
         return temp;
     }
-
     @Override
+    
     public T getValue() {
         return super.getValue(); 
     }
@@ -36,17 +40,19 @@ public class Kode <T> extends ChangerType<T>{
     public void setTemp(T value){
         this.temp = (String) getValue();
     }
+    
     public HashMap<String,String> getKamusKode(){
         return daftarKode;
     }
+    
     public int getLength(){
         return length;
     }
-
+    
     public boolean emptyError(T value) throws InputError  {
-        return super.emptyError(value); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
-        
+        return super.emptyError(value); 
+    }   
+    
     public boolean typeError(T value){
         if (value instanceof String){
             return false;
@@ -55,6 +61,7 @@ public class Kode <T> extends ChangerType<T>{
             return true;
         }
     }
+    
     public boolean constraintError(T value,int length) throws InputError{
             setTemp(value);
             if (getTemp().length()>length){
@@ -70,10 +77,10 @@ public class Kode <T> extends ChangerType<T>{
         try {
             setTemp(value);
             if (!daftarKode.containsKey(getTemp())||getTemp().length()>length){
-                throw new InputError(String.format("Nilai Variabel %s Salah",super.getNama()));
+                throw new KodeError(String.format("Nilai Variabel %s Terlalu Panjang",super.getNama()));
             }
             
-        } catch (InputError e){
+        } catch (KodeError e){
             throw e;
         } finally {
             if (daftarKode.containsKey(getTemp()) && getTemp().length()<=length){
@@ -83,28 +90,30 @@ public class Kode <T> extends ChangerType<T>{
             }
         }
     }
+    
     public boolean checkValue(boolean identifier) throws InputError{
         if (emptyError(super.getValue())||typeError(super.getValue()) || constraintError(super.getValue(),getLength())){
-            //System.out.println(getNama()+" error");
             return false;
         }
         return true;
     }
-    public boolean checkValue(){
-        if (typeError(super.getValue()) || constraintError(super.getValue(),getKamusKode(),getLength())){
+    
+    public boolean checkValue() throws InputError{
+        if (emptyError(super.getValue()) || typeError(super.getValue()) || constraintError(super.getValue(),getKamusKode(),getLength())){
             return false;
         }
         return true;
     }
+    
     public String getValueKode(){
         return daftarKode.get(super.getValue());
     }
-  
+    
     public String toString(boolean identifier){
         return String.format("%s-Nilai dari variabel %s(%s) yaitu: '%s'",getType(),super.getNama(),super.getId(),super.getValue());
     }
-
+    
     public String toString(){
         return String.format("%s-Nilai dari variabel %s (%s) yaitu: [Kode: '%s', Label: '%s']",getType(),super.getNama(),super.getId(),super.getValue(),getValueKode());
-    }
+    }    
 }

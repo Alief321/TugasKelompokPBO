@@ -28,7 +28,7 @@ public class Main {
         KodeKab<String> kabupaten=null;
         KodeKec<String> kecamatan=null;
         Kode<String> bbh=null ,kju=null, tanPang=null, hortikultura=null ,perkebunan=null, kehutanan=null, perikanan=null , peternakan=null, kunjungan = null, aktif=null;
-        Kalimat<String> namaPerusahaanFix = null,telpFix= null, faxFix = null, alamatFix=null;
+        //Kalimat<String> namaPerusahaanFix = null,telpFix= null, faxFix = null, alamatFix=null;
         Kuesioner kuesioner = null;
         Perusahaan perusahaan = null;
         ArrayList<Perusahaan> listAllPerusahaan = new ArrayList<>();
@@ -214,7 +214,7 @@ public class Main {
                         if (kodeJUU.containsKey(kodeKju)==false) {
                             throw new InputError("Kode KJU tidak ada dalam Kriteria BPS\nValidasi GAGAL!");
                         }
-                        } catch (Exception e) {
+                        } catch (InputError e) {
                         System.out.println(ANSI_RED+e+ANSI_RESET);
                         inputValid=false;
                         }
@@ -240,7 +240,7 @@ public class Main {
                             alamat = userInput.nextLine();
                             System.out.println("Nomor Telephone "+ANSI_YELLOW+"(awali dengan +62 atau +kode negara lain diikuti nomer)"+ANSI_RESET+" :");
                             telp = userInput.nextLine();
-                            System.out.println("Nomor Faksimili "+ANSI_YELLOW+"(awali dengan kode wilayah misal (021) lalu diikuti nomer )"+ANSI_RESET+" :");
+                            System.out.println("Nomor Faksimili "+ANSI_YELLOW+"(awali dengan kode wilayah misal (021) atau (kode) lalu diikuti nomer )"+ANSI_RESET+" :");
                             fax = userInput.nextLine();
                             System.out.println("\nDaftar BBH");
                             for (Map.Entry<String, String> entry : BBHList.entrySet()) {
@@ -267,7 +267,7 @@ public class Main {
                             kodeKunj = userInput.nextLine();
                             if (umum.containsKey(kodeKunj)==false) {
                                 System.out.println(ANSI_RED+"Kesalahan input kode status");
-                                throw new Exception("Kode kunjungan tidak ada dalam Kriteria BPS"+ANSI_RESET);
+                                throw new InputError("Kode kunjungan tidak ada dalam Kriteria BPS"+ANSI_RESET);
                              }
                             System.out.println("\nDaftar Kategori Aktif");
                             for (Map.Entry<String, String> entry : active.entrySet()) {
@@ -279,7 +279,7 @@ public class Main {
                             kodeActive = userInput.nextLine();
                             if (active.containsKey(kodeActive)==false) {
                                 System.out.println(ANSI_RED+"Kesalahan input kode status");
-                                throw new Exception("Kode Aktif tidak ada dalam Kriteria BPS"+ANSI_RESET);
+                                throw new InputError("Kode Aktif tidak ada dalam Kriteria BPS"+ANSI_RESET);
                              }
 
                             //                    Generate Subsektor dan JUU
@@ -335,23 +335,19 @@ public class Main {
                             //                    Membuat Variabel Perusahaan
                             System.out.println("Membuat variabel perusahaan");
                             System.out.println("Memuat variabel...");
-                            namaPerusahaanFix = new Kalimat<>("NamaPerusahaan", "DPP.07", namaPerusahaan);
-                            alamatFix = new Kalimat<>("AlamatPerusahaan", "DPP.08", alamat);
-                            telpFix = new Kalimat<>("Telephone", "DPP.09", telp);
-                            faxFix = new Kalimat<>("Fax", "DPP.10", fax);
                             bbh = new Kode<>("BBH", "DPP.11", kodeBBH,BBHList,2);
                             kunjungan = new Kode<>("kunjungan", "DPP.12", kodeKunj,umum, 2);
                             aktif = new Kode<>("aktif", "DPP.13", kodeActive,active, 2);
                             dpp = new DPP(kunjungan, aktif);
-                            perusahaan = new Perusahaan(noUrut, kip, namaPerusahaanFix, alamatFix, telpFix, faxFix, bbh, subsektor, dpp, descJUU);
-                            if (!perusahaan.validate(namaPerusahaanFix, alamatFix, telpFix, faxFix, bbh)) {
+                            perusahaan = new Perusahaan(noUrut, kip, namaPerusahaan, alamat, telp, fax, bbh, subsektor, dpp, descJUU);
+                            if (!perusahaan.validate()) {
     //                           tidak lakukan apa apa 
                             }else{
                                 listAllPerusahaan.add(perusahaan);
                                 kuesioner.setListAllPerusahaan(listAllPerusahaan);
                                 inputValid=true;
                             }
-                        } catch (Exception e) {
+                        } catch (InputError e) {
                             System.out.println(ANSI_RED+"Membuat Variabel Perusahaan gagal");
                             System.out.println(e+ANSI_RESET);
                             inputValid=false;
@@ -366,6 +362,7 @@ public class Main {
                     }
                     break;
                 case "3":
+                    System.out.println(ANSI_GREEN+"Terima kasih"+ANSI_RESET);
                     System.exit(0);
                     loop = false;
                     break;
@@ -375,5 +372,4 @@ public class Main {
             } while (loop);
         } while (loop);
     }
-
 }

@@ -7,7 +7,6 @@
  * 5. Almira Utami (222111877)
  */
 import java.util.ArrayList;
-
 public class KodeKec <T> extends Kode <T> {
     private ArrayList<String> daftarNama = new ArrayList<>();
     
@@ -15,12 +14,11 @@ public class KodeKec <T> extends Kode <T> {
         super("Kode Kecamatan","DP.03",value,3);
     }
     
-    
     public boolean validate() throws InputError, NumberFormatException {
     if (checkValue(true)) {
         try {
             int value = Integer.parseInt((String)this.getValue());
-            if (value<999 && value>0) {
+            if (value<1000 && value>0) {
                 System.out.println(Main.ANSI_GREEN + "Validasi Sukses! Object Kecamatan Akan Dibuat!" + Main.ANSI_RESET);
                 return true;
             } else {
@@ -34,11 +32,8 @@ public class KodeKec <T> extends Kode <T> {
     }
     return true;
 }
-
-    
     @Override
     public String toString(){
         return "\nKode Kecamatan = "+getValue();
     }  
-    
 }

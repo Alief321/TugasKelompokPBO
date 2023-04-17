@@ -13,7 +13,6 @@ public class KIP {
     private Kode kju;
     private int noUrut;
     
-    
     public KIP(KodeProv kodeProv, KodeKab kodeKab, KodeKec kodeKec, Kode kju, int noUrut) throws InputError {
        if(validate(kodeProv, kodeKab, kodeKec, kju)){
         this.kodeProv = kodeProv;
@@ -44,7 +43,6 @@ public class KIP {
         return kodeProv;
     }
     
-    
     public boolean validate(KodeProv kodeProv, KodeKab kodeKab, KodeKec kodeKec, Kode kju ) throws InputError{
         if(kodeProv.checkValue(true)&& kodeKab.checkValue(true) && kodeKec.checkValue(true) && kju.checkValue()){
             System.out.println(Main.ANSI_GREEN+"Validasi Sukses! Object KIP Akan Dibuat!"+Main.ANSI_RESET);
@@ -52,16 +50,17 @@ public class KIP {
         }
         else{
             Object[] obj = {kodeProv,kodeKab,kodeKec,kju};
-            System.out.println("Validasi Gagal! Harap Ulang Input Data Object Kecamatan!");
+            System.out.println("Validasi Gagal! Harap Ulang Input Data Object KIP!");
             deleteKIP(obj);
             return false;
         }
      }
      
-     public void delete(Object obj){
+    public void delete(Object obj){
         obj = null;
-     }
-      public void deleteKIP(Object[] objs){
+    }
+    
+     public void deleteKIP(Object[] objs){
         for (Object obj:objs){
             delete(obj);
         }
@@ -78,7 +77,4 @@ public class KIP {
                 "\nJenis Usaha Utama      = " + kju.getValueKode()+
                 "\nNomor Urut             =" + noUrut;
     }
-
-    
-
 }

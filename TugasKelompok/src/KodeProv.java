@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class KodeProv <T> extends Kode <T>{
     private ArrayList<String> daftarNama = new ArrayList<>();
     private String namaProv;
-
+    
     public KodeProv(T value, String namaProv) {
         super("KodeProv","DPP.02",value,2);
         this.namaProv =namaProv;
@@ -19,10 +19,11 @@ public class KodeProv <T> extends Kode <T>{
     public void addKabupaten(KodeKab kodeKab){
         this.daftarNama.add(kodeKab.getNama());
     }
+    
     public ArrayList getKabupatenList(){
         return daftarNama;
     }
-
+    
     public String getNamaProv() {
         return namaProv;
     }
@@ -43,19 +44,15 @@ public class KodeProv <T> extends Kode <T>{
                 throw new InputError(String.format("Nilai Variabel %s Salah", getNama()));
             }
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(String.format("Nilai Variabel %s Harus Berupa Angka", getNama()));
+            throw new InputError(String.format("Nilai Variabel %s Harus Berupa Angka", getNama()));
         }
     } else{
         return false;
     }
 }
-
-
-    @Override
-    
+    @Override   
     public String toString(){
         return "\nKode Provinsi = "+getValue()+
                "\nNama Provinsi = "+namaProv;
     }
-    
 }
