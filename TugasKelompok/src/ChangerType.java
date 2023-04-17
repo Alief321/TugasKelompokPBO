@@ -7,7 +7,7 @@
  * 5. Almira Utami (222111877)
  */
 
-public abstract class ChangerType <T> implements Variabel <T> {
+public class ChangerType <T> implements Variabel <T> {
     private String nama;
     private String id;
     private T value;
