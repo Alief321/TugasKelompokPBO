@@ -89,6 +89,7 @@ public class Perusahaan {
     public void delete(Object obj){
          obj = new Object();
          obj = null;
+         noUrut--;
     }
     
     public void deletePerusahaan(Object[] objs){
