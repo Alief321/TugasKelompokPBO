@@ -15,7 +15,7 @@ public class KodeKab <T> extends Kode <T> {
         super("KodeKab","DPP.02",value,2);
         this.namaKab=namaKab;
     }
-   
+    
     public void addKecamatan(KodeKec kodeKec){
         this.daftarNama.add(kodeKec.getNama());
     }
@@ -28,7 +28,7 @@ public class KodeKab <T> extends Kode <T> {
     if(checkValue(true)){
         try {
             int value = Integer.parseInt((String)this.getValue());
-            if(value<39 && value>0){
+            if(value<100 && value>0){
                 if (namaKab.isEmpty()) {
                     throw new InputError("Nama Kabupaten tidak boleh kosong!");
                 } else if (!namaKab.matches("(?i)^[a-z]+(?:\\s[a-z]+)*$")) {
@@ -46,12 +46,12 @@ public class KodeKab <T> extends Kode <T> {
         return false;
     }
 }
-
+    
     public String getNamaKab() {
         return namaKab;
     }
-    
     @Override
+    
     public String toString(){
         return "\nKode Kabupaten = "+getValue()+
                "\nNama Kabupaten = "+namaKab;

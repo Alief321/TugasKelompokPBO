@@ -39,13 +39,24 @@ public class Subsektor {
         }
      }
      
-     public void delete(Object obj){
+    public void delete(Object obj){
         obj = null;
-     }
-      public void deleteSubSektor(Object[] objs){
+    }
+    
+    public void deleteSubSektor(Object[] objs){
         for (Object obj:objs){
             delete(obj);
         }
         System.out.println("Input Sebelumnya Sudah Berhasil Dihapus");
     } 
+
+    @Override
+    public String toString() {
+        return  "\nTanaman Pangan [" + tanamanPangan.getValue()+"]"+
+                "\nHoltikultura   [" + holtikultura.getValue()+"]"+
+                "\nPerkebunan     [" + perkebunan.getValue()+"]"+
+                "\nKehutanan      [" + kehutanan.getValue()+"]"+
+                "\nPeternakan     [" + peternakan.getValue()+"]"+
+                "\nPerikanan      [" + perikanan.getValue()+"]";
+    }
 }

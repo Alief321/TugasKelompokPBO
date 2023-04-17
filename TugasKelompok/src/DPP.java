@@ -14,27 +14,29 @@ public class DPP{
         this.kunjungan = kunjungan;
         this.aktif = aktif;
     }
-
+    
     public Kode getAktif() {
         return aktif;
     }
-
+    
     public Kode getKunjungan() {
         return kunjungan;
     }
-
+    
     public void setAktif(Kode aktif) {
         this.aktif = aktif;
     }
-
+    
     public void setKunjungan(Kode kunjungan) {
         this.kunjungan = kunjungan;
     }
-
     @Override
+    
     public String toString() {
-        return super.toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
-    
-    
+        if(kunjungan.getValue().equals("1")){
+            return "Sudah dikunjungi"+", "+aktif.getValueKode();
+        } else {
+            return "Belum dikonfirmasi"+", "+aktif.getValueKode();
+        }
+    }   
 }

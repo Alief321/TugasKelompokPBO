@@ -1,6 +1,4 @@
-
 import java.util.ArrayList;
-
 /**
  * Kelompok 1:
  * 1. Adib Sulthon Muammal (222111840)
@@ -78,7 +76,6 @@ public class Kuesioner {
         return countPerusahaan;
     }
 
-    
     @Override
     public String toString() {
         return "\n===== Informasi Kuesioner ====="+
@@ -87,6 +84,4 @@ public class Kuesioner {
                 "\nKode Kabupaten   = "+kodeKab.getValue()+ "("+kodeKab.getNamaKab()+")"+
                 "\nPeriode Data     = "+PeriodeData+"\n";
     }
-    
-    
 }

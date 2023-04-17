@@ -6,8 +6,8 @@
  * 4. Aliefta Zulvansyah Bahyperdana (222111873)
  * 5. Almira Utami (222111877)
  */
-class InputError extends Exception {
-    public InputError(String message) {
+class KodeError extends Exception {
+    public KodeError(String message){
         super(message);
     }
 }
